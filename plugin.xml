@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    id="com.ironsource.kudoskit" version="1.0">
+    <name>CDVKudosKit</name>
+    <description>KudosKit Plugin</description>
+    <author>Michael Badichi, ironSource</author>
+    <keywords>kudoskit,kudos,monetize,monetization,ironSource</keywords>
+
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="CDVKudosKit">
+                <param name="ios-package" value="CDVKudosKit" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+        <header-file src="ios/PhoneGap-KudosKit.h" />
+        <source-file src="ios/PhoneGap-KudosKit.m" />
+        <source-file src="ios/KudosKit.a" framework="true" />
+        <header-file src="ios/KudosKit.h" />
+        <framework src="libz.dylib" />
+        <framework src="social.framework" weak="true" />
+        <framework src="AdSupport.framework" weak="true" />
+        <framework src="StoreKit.framework"/>
+        <framework src="AudioToolbox.framework"/>
+        <framework src="CFNetwork.framework"/>
+        <framework src="MessageUI.framework"/>
+    </platform>
+    
+    <platform name="android">
+        
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <activity android:name="com.ironsrc.kudoskit.RightspotActivity"
+                      android:theme="@android:style/Theme.Translucent"
+                      android:configChanges="keyboardHidden|orientation|screenSize" />
+        </config-file>
+        
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+            <uses-permission android:name="android.permission.INTERNET" />
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+            <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+            <uses-permission android:name="com.android.vending.BILLING" />
+        </config-file>
+
+
+        <config-file target="config.xml" parent="/*">
+            <feature name="CDVKudosKit">
+                <param name="android-package" value="com.ironsource.kudoskit.CDVKudosKit" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+        <source-file src="android/CDVKudosKit.java" target-dir="src/com/ironsource/kudoskit" />
+        <source-file src="android/kudoskit-android.jar" target-dir="libs" framework="true" />
+    </platform>
+
+    <js-module src="www/kudoskit.js" name="CDVKudosKit">
+        <clobbers target="CDVKudosKit" />
+    </js-module>
+</plugin>
